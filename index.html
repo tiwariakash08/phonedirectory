@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Phone Directory</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+		.container
+		{
+			padding-top: 10px;
+		}
+		#list
+		{
+			padding-top: 10px;
+		}
+		.addform
+		{
+			padding-top: 20px;
+		}
+		.tgg
+		{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	<div class="col-lg-12">
+		<button type="button" class="btn btn-primary" onclick="mytog()">Add</button>
+	</div>
+	</div>
+	<div class="addform tgg" id="adf">
+		<div class="row">
+			<div class="col-lg-4">
+				<input type="text" name="newname" onkeyup="nameset()" id="newname" placeholder="Enter Name">
+			</div>
+			<div class="col-lg-4">
+				<input type="text" name="newnum" onkeyup="numset()" id="newnum" placeholder="Enter Number">
+			</div>
+			<div class="col-lg-4">
+				<button class="btn btn-primary btn-sm" onclick="addfn()">Enter</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<label>Name:</label>
+				<label id="enname"></label>
+			</div>
+			<div class="col-lg-6">
+				<label>Number:</label>
+				<label id="ennum"></label>
+			</div>
+		</div>
+	</div>
+		<div class="row" id="dir">
+			<div class="col-lg-6"><h4>NAME</h4></div>
+			<div class="col-lg-6"><h4>NUMBER</h4></div>
+		</div>		
+</div>
+<script type="text/javascript">
+var i =1;
+function addfn()
+{
+	var txt=document.getElementById("dir").innerHTML;
+	var newname=document.getElementById("newname").value;
+	var newnum=document.getElementById("newnum").value;
+	txt+="<div id='list' class='row single'><div class='col-lg-4'>"+newname+"</div>"+"<div class='col-lg-4'>"+newnum+"</div>"+"<div class='col-lg-4'><button type='button' class='btn btn-danger remove'>Delete</button></div></div>";
+	document.getElementById("dir").innerHTML=txt;
+	document.getElementById("newname").value="";
+	document.getElementById("newnum").value="";
+	document.getElementById("enname").value="";
+	document.getElementById("ennum").value="";
+	var btn=document.getElementById("adf");
+	btn.classList.toggle("tgg");
+	var btn = document.getElementsByClassName('remove')
+
+for (var i = 0; i < btn.length; i++) {
+  btn[i].addEventListener('click', function(e) {
+    e.currentTarget.parentNode.parentNode.remove();
+    //this.closest('.single').remove() // in modern browsers in complex dom structure
+    //this.parentNode.remove(); //this refers to the current target element 
+    //e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+  }, false);
+}
+}
+function nameset()
+{
+	var name=document.getElementById("newname").value;
+	document.getElementById("enname").innerText=name;
+}
+function numset()
+{
+	var num=document.getElementById("newnum").value;
+	document.getElementById("ennum").innerText=num;
+}	
+function mytog()
+{
+	var btn=document.getElementById("adf");
+	btn.classList.toggle("tgg");
+}
+</script>
+</body>
+</html>
